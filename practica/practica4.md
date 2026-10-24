@@ -39,7 +39,7 @@ En el caso que se pulse **Rellenar usuario** volveremos al formulario, pero habr
 
 Una vez que, a través del formulario, hayamos entrado en la aplicación, el esquema de navegación que implementaremos será el siguiente:
  
-![Navegación](./images/imagen04a.jpg)
+![Navegación](./images/imagen04b.jpg)
 
 
 - Desde la pantalla de **Continentes**, podremos hacer click en cada una de ellas para navegar con los países de ese continente. Os puede ayudar para este propósito el widget `InkWell`.
