@@ -11,6 +11,10 @@ Para esta tarea vamos a enlazar las distintas pantallas que generamos en la prá
 
 En esta práctica utilizaremos una clase que nos proporcionará, a través del repositorio, la información sobre las diferentes provincias y comarcas. En prácticas posteriores enlazaremos este repositorio con la información que obtuvimos a través de la API en la práctica 1.
 
+Os he dejado un fichero data.zip en el que tenemos la carpeta `data`, con un repositorio y un servicio de datos algo distinto al que teníamos en la práctica 3. El primer paso que podéis hacer es adaptar vuestra práctica 3 a este nuevo repositorio.
+
+Una vez tengamos ese paso hecho, vamos a modificar nuestra práctica para que tenga la siguiente funcionalidad.
+
 ## Pantalla inicial. Formulario.
 
 La pantalla inicial será un formulario con el siguiente funcionamiento:
@@ -35,36 +39,84 @@ En el caso que se pulse **Rellenar usuario** volveremos al formulario, pero habr
 
 Una vez que, a través del formulario, hayamos entrado en la aplicación, el esquema de navegación que implementaremos será el siguiente:
  
-![Navegación](./images/imagen04.jpg)
+![Navegación](./images/imagen04a.jpg)
 
 
-- Desde la pantalla de **Provincias**, podremos hacer click en cada una de ellas para navegar con las comarcas de esa provincia. Os puede ayudar para este propósito el widget `GestureDetector`.
+- Desde la pantalla de **Continentes**, podremos hacer click en cada una de ellas para navegar con los países de ese continente. Os puede ayudar para este propósito el widget `InkWell`.
 
-- La pantalla de **Comarcas** (tendrá un texto en la AppBar), permitirá seleccionar una comarca y navegar a la pantalla con información sobre la misma.
+- La pantalla de **Países** (tendrá un texto en la AppBar), permitirá seleccionar un país y navegar a la pantalla con información sobre el mismo.
 
-- La pantalla de información de la comarca se creará nueva y tendrá un `Scaffold` con una barra de navegación que utilizará los widgets diseñados en la práctica anterior (habrá que quitarles el Scaffold). En la AppBar nos aparecerá información de lo que estamos mostrando. De momento la información del tiempo la dejamos como en la práctica anterior.
+- La pantalla de información del país se creará nueva y tendrá un `Scaffold` con una barra de navegación que utilizará los widgets diseñados en la práctica anterior (habrá que quitarles el Scaffold). En la AppBar nos aparecerá información de lo que estamos mostrando. De momento la información del tiempo la dejamos como en la práctica anterior.
 
 <br>
 
-## Obtención de la Información de las Comarcas
+## Obtención de la Información
 
-En la práctica anterior recuperábamos la información a través de la clase `RepositoryEjemplo`.
+Como hemos dicho al principio de la práctica, se os ofrece un fichero **data.zip** en el que tenéis "completa" la capa data para utilizar en vuestro proyecto.
 
-En esta práctica vamos a trabajar ya con todos los datos sobre las provincias y las comarcas. Esta información se encuentra en la clase `RepositoryData` y se accede a ella a través de la clase `RepositoryEjemplo`. Tenéis en aules un fichero llamado **repository.zip** en el cuál encontraréis los dos ficheros con esas dos clases.
+En el fichero `/lib/data/services/paises_ejemplo.dart` nos encontramos la clase `PaisesEjemplo` que nos ofrece una lista JSON con la información estructurada de los continentes y sus países.
 
-Nos encontramos en `RepositoryEjemplo` los métodos que utilizábamos antes, pero con algunos cambios:
+En esta práctica vamos a trabajar ya con **todos los datos sobre los continentes y los países**. Esta información se encuentra en la clase `PaisesEjemplo` y se accede a ella a través de la clase `PaisesRepository`.
 
-- El método `obtenerProvincias()` obtendrá la lista de provincias de la clase `RepositoryData`. Lo tenéis implementado, pero es interesante entender cómo funciona.
+Nos encontramos en `PaisesRepository` los métodos que utilizábamos antes, pero con algunos cambios:
 
-- El método `obtenerComarcas()` recibirá ahora un `String` con el nombre de la provincia de la que deseamos obtener las comarcas, y lo que hace es utilizar la clase `RepositoryData` para localizar la provincia y devolver una lista JSON con los nombres y las imágenes correspondientes a la provincia. Este método también está implementado.
+- El método `getContinentes()` obtendrá la lista de continentes de la clase `PaisesEjemplo`. Lo tenéis implementado, pero es interesante entender cómo funciona.
+
+- El método `getPaises()` recibirá ahora un `String` con el nombre del continentes del que deseamos obtener los paises y devolverá una lista de países. Este método también está implementado.
   
-- El método `obtenerInfoComarca()` recibirá un `String` con el nombre de la comarca de la que deseamos obtener la información. Este método **lo debéis implementar vosotros**. Se recorrerá toda la información de provincias y comarcas y devolverá un objeto de tipo `Comarca` cuando encuentre la comarca con el nombre que se busca. Observad cómo trabajan los métodos anteriores y recordad el constructor `fromJSON` de la clase `Comarca`.
+- El método `infoPais()` recibirá un `String` con el nombre del país del que desesmoa obtener la información. Este método **lo debéis implementar vosotros**. Se recorrerá toda la información de continentes y países y devolverá un objeto de tipo `Pais` cuando encuentre el país con el nombre que se busca. Observad cómo trabajan los métodos anteriores y recordad el constructor `fromJSON` de la clase `Pais`.
 
 <br>
+Hasta aquí sería la práctica básica y obligatoria. 
 <br>
+
+## Ampliación de la práctica.
+
+<br>
+
+- Al elegir un continente mostrar un `NavigationBar` con los países correspondientes en formato List y en formato Grid:
+
+<br>
+
+![List Grid](./images/imagen05.jpg)
+
+<br>
+
+- Investigar cómo detectar si nuestra app está en modo apaisado. En ese caso mostrar la pantalla de Información general e Información detallada de un país con un `NavigationRail` en vez del `NavigationBar` (si no estamos en modo apaisado la mostraremos tal y como se implementó en la parte básica, es decir con el `NavigationBar`):
+
+<br>
+
+![Rail 1](./images/imagen07.jpg)
+
+<br>
+
+- Si se ha implementado la pantalla Países de un Continente con el ListView y el GridView detectar el modo apaisado y también mostrar en ese caso con un `NavigationRail` en vez del `NavigationBar`:
+
+<br>
+
+![Rail 1](./images/imagen06.jpg)
+
+<br>
+
 
 <hr>
 
-Para la ENTREGA de la práctica recordad hacer `flutter clean` para que esta llegue limpia y entregad también un pequeño pdf en el que expliquéis los pasos para la implementación de las distintas pantallas y las dificultades encontradas.
+Para la ENTREGA de la práctica recordad hacer `flutter clean` para que ésta llegue limpia y entregad también un **pequeño pdf** en el que expliquéis los pasos para la implementación de las distintas pantallas y las dificultades encontradas.
 
 <hr>
+
+<br>
+
+## Rúbrica
+
+| Concepto | Valor         |
+|----------|---------------------|
+| Formulario Inicial: Interfaz    | 1.5 |
+| Formulario Inicial: Funcionamiento    | 1.5           |
+| Navegación correcta entre pantallas| 2  |
+| Navigation **Bar**: Información General, <br>Información Detallada| 2   |
+| **Ampliación** | |
+| Navigation **Bar**: Lista Países, Grid Países| 1 |
+| Navigation **Rail**: Info General, Grid Países  | 1  |
+| Navigation **Rail**: Lista Países, Grid Países| 1 |
+
